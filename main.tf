@@ -650,7 +650,7 @@ data "autocloud_blueprint_config" "sg" {
     name  = "sg.variables.rules"
     type  = "raw"
     value = <<-EOT
-      rules = [
+      [
         {
           key         = "service port"
           type        = "ingress"
