@@ -309,21 +309,21 @@ data "autocloud_blueprint_config" "container" {
     type  = "raw"
     value = <<-EOT
       {
-      logDriver = "awslogs"
-      options = {
-        awslogs-group = format(
-          "/%s/%s/ecs/%s/%s",
-          "{{namespace}}",
-          "{{environment}}",
-          "{{namespace}}-{{environment}}-example",
-          {{service_name}}
-        )
-        awslogs-region       = data.aws_region.current.name,
-        awslogs-create-group = true,
-        awslogs-stream-prefix = {{service_name}}
+        logDriver = "awslogs"
+        options = {
+          awslogs-group = format(
+            "/%s/%s/ecs/%s/%s",
+            "{{namespace}}",
+            "{{environment}}",
+            "{{namespace}}-{{environment}}-example",
+            {{service_name}}
+          )
+          awslogs-region       = data.aws_region.current.name,
+          awslogs-create-group = true,
+          awslogs-stream-prefix = {{service_name}}
+        }
       }
-    }
-    EOT
+      EOT
     variables = {
       namespace    = "global.variables.namespace",
       environment  = "global.variables.environment",
@@ -650,7 +650,7 @@ data "autocloud_blueprint_config" "sg" {
     name  = "sg.variables.rules"
     type  = "raw"
     value = <<-EOT
-      rules = [
+      [
         {
           key         = "service port"
           type        = "ingress"
